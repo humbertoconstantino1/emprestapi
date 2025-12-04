@@ -19,4 +19,8 @@ export class UserService {
   findOne(id: number) {
     return this.repo.findOne({ where: { id }, relations: ['loans'] });
   }
+
+  findByEmail(email: string) {
+    return this.repo.findOne({ where: { email } });
+  }
 }

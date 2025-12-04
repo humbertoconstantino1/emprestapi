@@ -1,15 +1,11 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Param, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
-import { User } from './user.entity';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
+@UseGuards(JwtAuthGuard)
 @Controller('users')
 export class UserController {
   constructor(private userService: UserService) {}
-
-  @Post()
-  create(@Body() body: Partial<User>) {
-    return this.userService.create(body);
-  }
 
   @Get()
   findAll() {
